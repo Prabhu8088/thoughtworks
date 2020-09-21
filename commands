@@ -1,0 +1,12 @@
+docker build -t apache:v2 .
+docker run -itd --name="apache" -p 9090:80 apache:v2
+docker pull mysql:latest
+docker run -itd --name="mysql" -e MYSQL_ROOT_PASSWORD="password@123" mysql:latest
+kubectl create -f apache-pod-def.yaml 
+kubectl create -f apache-service-def.yaml 
+kubectl create -f apache-deploy-def.yaml 
+kubectl create -f sql-def.yaml 
+kubectl create -f sql-service.yaml 
+kubectl create -f sql-deploy-def.yaml
+kubectl exec -it mysql-deploy-6cdf9bffb4-xmrgf  bash
+
