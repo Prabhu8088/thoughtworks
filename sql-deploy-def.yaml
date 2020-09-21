@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  labels:
+    app: webapp-service
+    type: backend
+spec:
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        app: mysql
+        type: db
+    spec:
+      containers:
+        - image: meprabhu/docker-images:sqlv4
+          name: mysql-container
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "password@123"
+          ports:
+            - containerPort: 3306
+  replicas: 2
+  selector:
+    matchLabels:
+      type: db
