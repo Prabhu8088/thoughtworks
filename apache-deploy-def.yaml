@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deploy
+  labels:
+    app: webapp
+    type: frontend
+spec:
+  template:
+    metadata:
+      name: apache-pod
+      labels:
+        app: webapp
+        type: front-end
+    spec:
+      containers:
+        - image: meprabhu/docker-images:version1.0
+          name: apache-container
+  replicas: 2
+  selector:
+    matchLabels:
+     app: webapp
+     type: front-end
